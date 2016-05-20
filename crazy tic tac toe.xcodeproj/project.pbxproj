@@ -16,6 +16,8 @@
 		775651B81CEF6B1C00742E85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 775651B61CEF6B1C00742E85 /* LaunchScreen.storyboard */; };
 		775651C31CEF6B1C00742E85 /* crazy_tic_tac_toeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651C21CEF6B1C00742E85 /* crazy_tic_tac_toeTests.swift */; };
 		775651CE1CEF6B1D00742E85 /* crazy_tic_tac_toeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651CD1CEF6B1D00742E85 /* crazy_tic_tac_toeUITests.swift */; };
+		775651DC1CEF6B4500742E85 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651DB1CEF6B4500742E85 /* ImageManager.swift */; };
+		775651DE1CEF6B6E00742E85 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651DD1CEF6B6E00742E85 /* Shape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		775651C91CEF6B1D00742E85 /* crazy tic tac toeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "crazy tic tac toeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		775651CD1CEF6B1D00742E85 /* crazy_tic_tac_toeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = crazy_tic_tac_toeUITests.swift; sourceTree = "<group>"; };
 		775651CF1CEF6B1D00742E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		775651DB1CEF6B4500742E85 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		775651DD1CEF6B6E00742E85 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				775651B41CEF6B1C00742E85 /* Assets.xcassets */,
 				775651B61CEF6B1C00742E85 /* LaunchScreen.storyboard */,
 				775651B91CEF6B1C00742E85 /* Info.plist */,
+				775651DB1CEF6B4500742E85 /* ImageManager.swift */,
+				775651DD1CEF6B6E00742E85 /* Shape.swift */,
 			);
 			path = "crazy tic tac toe";
 			sourceTree = "<group>";
@@ -263,9 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				775651DE1CEF6B6E00742E85 /* Shape.swift in Sources */,
 				775651AE1CEF6B1C00742E85 /* GameScene.swift in Sources */,
 				775651B01CEF6B1C00742E85 /* GameViewController.swift in Sources */,
 				775651AA1CEF6B1C00742E85 /* AppDelegate.swift in Sources */,
+				775651DC1CEF6B4500742E85 /* ImageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
