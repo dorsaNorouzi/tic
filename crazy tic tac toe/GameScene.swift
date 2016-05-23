@@ -856,7 +856,7 @@ class GameScene: SKScene {
             }
         }
         
-        //blue stuff
+        //green stuff
         //if they are equal
         for var i = 0; i < 3; i = i + 1 {
             if arr2[0][0][i] && arr2[0][1][i] && arr2[0][2][i] {
@@ -913,7 +913,7 @@ class GameScene: SKScene {
         
         //if they are in increasing order
         
-        if arr2[0][0][2] && arr2[0][1][1] &&  arr2[0][2][2] {
+        if arr2[0][0][2] && arr2[0][1][1] &&  arr2[0][2][0] {
             winBlue = true
         } else if arr2[1][0][2] && arr2[1][1][1] && arr2[1][2][0] {
             winBlue = true
