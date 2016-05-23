@@ -13,21 +13,21 @@ import SpriteKit
 class Shape: SKSpriteNode {
     public var type: Int
     public var shapeColor: UIColor
-    init(type: Int, shapeC: UIColor ){
+    init(type: Int, shapeC: UIColor, rect: CGRect ){
         self.type = type
         self.shapeColor = shapeC
         let image: UIImage?//do your setup here to make a UIImage
        
         switch type{
         case 1:
-           image = ImageManager.circleImage() //do your setup here to make a UIImage
+           image = ImageManager.circleImage(rect, ballColor: shapeC) //do your setup here to make a UIImage
             
         case 2:
-           image = ImageManager.squareImage() //do your setup here to make a UIImage
+           image = ImageManager.squareImage(rect, ballColor: shapeC) //do your setup here to make a UIImage
         case 3:
-            image = ImageManager.triangleImage() //do your setup here to make a UIImage
+            image = ImageManager.triangleImage(rect, ballColor: shapeC) //do your setup here to make a UIImage
         default:
-            image = ImageManager.squareImage() //do your setup here to make a UIImage
+            image = ImageManager.squareImage(rect, ballColor: shapeC) //do your setup here to make a UIImage
         }
         
         let Texture = SKTexture(image: image!)

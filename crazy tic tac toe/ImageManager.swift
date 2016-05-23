@@ -10,17 +10,14 @@ import Foundation
 import UIKit
 
 class ImageManager {
-    class func circleImage() -> UIImage {
-        let size: CGSize = CGSize(width: 83, height: 70)
+    class func circleImage(rect: CGRect, ballColor: UIColor) -> UIImage {
+        let size: CGSize = CGSize(width: rect.width, height: rect.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
     
-        //// Color Declarations
-        let ballColor = UIColor(red: 0.934, green: 0.019, blue: 0.019, alpha: 1.000)
-        
         //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalInRect: CGRectMake(7, 6, 69, 58))
+        let ovalPath = UIBezierPath(ovalInRect: rect)
         ballColor.setStroke()
-        ovalPath.lineWidth = 4
+        ovalPath.lineWidth = 2
         ovalPath.stroke()
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -31,18 +28,15 @@ class ImageManager {
         
     }
     
-    class func squareImage() -> UIImage {
-        let size: CGSize = CGSize(width: 83, height: 70)
+    class func squareImage(rect: CGRect, ballColor: UIColor) -> UIImage {
+        let size: CGSize = CGSize(width: (rect.width * 2) / sqrt(2), height: (rect.height * 2)/sqrt(2))
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        //// Color Declarations
-        let ballColor = UIColor(red: 0.934, green: 0.019, blue: 0.019, alpha: 1.000)
-        
-        //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalInRect: CGRectMake(7, 6, 69, 58))
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(rect: CGRectMake(4, 4, ((rect.width * 2) / sqrt(2)) - 8, ((rect.height * 2) / sqrt(2)) - 8))
         ballColor.setStroke()
-        ovalPath.lineWidth = 4
-        ovalPath.stroke()
+        rectanglePath.lineWidth = 4
+        rectanglePath.stroke()
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         //clear
@@ -51,20 +45,23 @@ class ImageManager {
         
     }
     
-    class func triangleImage() -> UIImage {
-        let size: CGSize = CGSize(width: 83, height: 80)
+    class func triangleImage(rect: CGRect, ballColor: UIColor) -> UIImage {
+        let sqrect = CGRectMake(4, 4, ((rect.width * 2) / sqrt(2)) - 8, ((rect.height * 2) / sqrt(2)) - 8)
+        let size: CGSize = CGSize(width: (rect.width * 2) / sqrt(2), height: (rect.height * 2)/sqrt(2))
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
-        //// Color Declarations
-        let ballColor = UIColor(red: 0.934, green: 0.019, blue: 0.019, alpha: 1.000)
-        
-        //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalInRect: CGRectMake(0, 0, 69, 58))
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.moveToPoint(CGPointMake(4, 4))
+        bezierPath.addLineToPoint(CGPointMake(sqrect.width + 4, 4))
+        bezierPath.addLineToPoint(CGPointMake((sqrect.width + 8) / 2  , sqrect.height ))
+        bezierPath.addLineToPoint(CGPointMake(4, 4))
+        bezierPath.closePath()
         ballColor.setStroke()
-        ovalPath.lineWidth = 4
-        ovalPath.stroke()
-        
+        bezierPath.lineWidth = 4
+        bezierPath.stroke()
         let image = UIGraphicsGetImageFromCurrentImageContext()
+        
         //clear
         UIGraphicsEndImageContext()
         return image
