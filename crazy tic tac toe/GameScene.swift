@@ -510,7 +510,7 @@ class GameScene: SKScene {
             }
         } else {
             
-            //blue turn
+            //green turn
             //first row squares
             if(selected?.position.x < margin + x && selected?.position.y > 2 * y ){
                 
@@ -662,7 +662,7 @@ class GameScene: SKScene {
                 redTurn = !redTurn
             }
                 
-                //third row squares
+            //third row squares
             else if(selected?.position.x < margin + x && selected?.position.y > 0 ){
                 
                 switch selected!.type {
@@ -696,7 +696,7 @@ class GameScene: SKScene {
                         selected!.position = CGPointMake(margin + x + getCircle().width + 10, getCircle().width + 10)
                     }
                 case 2:
-                    if !arr2[2][1][1] && arr[2][1][1] {
+                    if !arr2[2][1][1] && !arr[2][1][1] {
                         arr2[2][1][1] = true
                         selected!.position = CGPointMake(margin + x + getCircle().width + 10, getCircle().width + 10)
                     }
