@@ -15,10 +15,11 @@ class GameScene: SKScene {
     var redTurn = true
     var arr = [[[Bool]]]()
     var arr2 = [[[Bool]]]()
+    var help = SKSpriteNode()
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.blackColor()
         
         //putting zeros in the array
         for var i = 0; i < 3; i = i + 1 {
@@ -46,6 +47,12 @@ class GameScene: SKScene {
             arr2.append(a)
         }
         
+        //help sign
+        help = SKSpriteNode(texture: SKTexture(image: ImageManager.imageForHelpSymbol()))
+        help.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        help.name = "help"
+        self.addChild(help)
+
         
         //left side stuff
         for var i = 0; i < 3; i = i + 1 {
@@ -70,20 +77,20 @@ class GameScene: SKScene {
         
         //right side stuff
         for var i = 0; i < 3; i = i + 1 {
-            var shape = Shape(type: 1, shapeC: UIColor.blueColor(), rect: getCircle())
+            var shape = Shape(type: 1, shapeC: UIColor.greenColor(), rect: getCircle())
             shape.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
             self.addChild(shape)
         }
         
         
         for var i = 0; i < 3; i = i + 1 {
-            var shape2 = Shape(type: 2, shapeC: UIColor.blueColor(), rect: getCircle())
+            var shape2 = Shape(type: 2, shapeC: UIColor.greenColor(), rect: getCircle())
             shape2.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMidY(self.frame))
             self.addChild(shape2)
         }
         
         for var i = 0; i < 3; i = i + 1 {
-            var shape3 = Shape(type: 3, shapeC: UIColor.blueColor(), rect: getCircle())
+            var shape3 = Shape(type: 3, shapeC: UIColor.greenColor(), rect: getCircle())
             shape3.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, getCircle().width + 10)
             self.addChild(shape3)
             
@@ -118,10 +125,25 @@ class GameScene: SKScene {
         var touchingSomething = false
         for node in nodes {
             if let n = node as? Shape{
-                if (redTurn && n.shapeColor == UIColor.redColor()) || (!redTurn && n.shapeColor == UIColor.blueColor()){
+                if (redTurn && n.shapeColor == UIColor.redColor()) || (!redTurn && n.shapeColor == UIColor.greenColor()){
+                    if n.position == CGPointMake(getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10) ||
+                    n.position == CGPointMake(getCircle().width, CGRectGetMidY(self.frame)) ||
+                    n.position == CGPointMake(getCircle().width, getCircle().width + 10) ||
+                    n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10) ||
+                    n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMidY(self.frame)) ||
+                        n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, getCircle().width + 10) {
                     selected = n
                     touchingSomething = true
+                    }
                 }
+            }
+            if node.name == "help" {
+                let scene = HelpScreen()
+                let skView = self.view!
+                skView.ignoresSiblingOrder = true
+                scene.scaleMode = .ResizeFill
+                scene.size = (size: skView.bounds.size)
+                skView.presentScene(scene)
             }
         }
         if !touchingSomething{
@@ -148,29 +170,7 @@ class GameScene: SKScene {
         //get the size of the device
         let x = biggestSquare / 3
         let y = biggestSquare / 3
-        if let s = selected{
-        if  selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
-            selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
-            selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
-            selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
-            selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
-            selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
-            selected!.position != CGPointMake(margin + getCircle().width + 10, getCircle().width + 10) &&
-            selected!.position != CGPointMake(margin + x + getCircle().width + 10, getCircle().width + 10) &&
-            selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, getCircle().width + 10) {
-            switch selected!.type {
-            case 1:
-                selected!.position = CGPointMake(getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
-            case 2:
-                selected!.position = CGPointMake(getCircle().width, CGRectGetMidY(self.frame))
-            case 3:
-                selected!.position = CGPointMake(getCircle().width, getCircle().width + 10)
-            default:
-                print(3)
-            }
-        }
-        }
-
+        
         // if (UIGestureRecognizer.state == UIGestureRecognizer)
     }
     
@@ -194,7 +194,7 @@ class GameScene: SKScene {
         let s1 = SKShapeNode()
         s1.path = p
         s1.lineWidth = 15
-        s1.strokeColor = UIColor.blackColor()
+        s1.strokeColor = UIColor.whiteColor()
         addChild(s1)
         
         let p2 = CGPathCreateMutable()
@@ -206,7 +206,7 @@ class GameScene: SKScene {
         let s2 = SKShapeNode()
         s2.path = p2
         s2.lineWidth = 15
-        s2.strokeColor = UIColor.blackColor()
+        s2.strokeColor = UIColor.whiteColor()
         addChild(s2)
         
         let p3 = CGPathCreateMutable()
@@ -218,7 +218,7 @@ class GameScene: SKScene {
         let s3 = SKShapeNode()
         s3.path = p3
         s3.lineWidth = 15
-        s3.strokeColor = UIColor.blackColor()
+        s3.strokeColor = UIColor.whiteColor()
         addChild(s3)
         
         let p4 = CGPathCreateMutable()
@@ -230,7 +230,7 @@ class GameScene: SKScene {
         let s4 = SKShapeNode()
         s4.path = p4
         s4.lineWidth = 15
-        s4.strokeColor = UIColor.blackColor()
+        s4.strokeColor = UIColor.whiteColor()
         addChild(s4)
         
         
@@ -259,7 +259,7 @@ class GameScene: SKScene {
             if(selected?.position.x < margin + x && selected?.position.y > 2 * y ){
                 switch selected!.type {
                 case 1:
-                    if !arr[0][0][0] && !arr2[0][0][1] {
+                    if !arr[0][0][0] && !arr2[0][0][0] {
                         arr[0][0][0] = true
                         selected!.position = CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10)
                         
@@ -271,7 +271,7 @@ class GameScene: SKScene {
                         
                     }
                 case 3:
-                    if !arr[0][0][2] && arr2[0][0][2] {
+                    if !arr[0][0][2] && !arr2[0][0][2] {
                         arr[0][0][2] = true
                         selected!.position = CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10)
                         
@@ -458,6 +458,8 @@ class GameScene: SKScene {
                 }
                 winTest(0, y: 0)
                 redTurn = !redTurn
+                
+                
             }
             else if(selected?.position.x > 2 * x + margin && selected?.position.y > 0) {
                 
@@ -482,6 +484,29 @@ class GameScene: SKScene {
                 }
                 winTest(0, y: 0)
                 redTurn = !redTurn
+            }
+            if let s = selected{
+                if  selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
+                    selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
+                    selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
+                    selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
+                    selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
+                    selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
+                    selected!.position != CGPointMake(margin + getCircle().width + 10, getCircle().width + 10) &&
+                    selected!.position != CGPointMake(margin + x + getCircle().width + 10, getCircle().width + 10) &&
+                    selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, getCircle().width + 10) {
+                    switch selected!.type {
+                    case 1:
+                        selected!.position = CGPointMake(getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
+                    case 2:
+                        selected!.position = CGPointMake(getCircle().width, CGRectGetMidY(self.frame))
+                    case 3:
+                        selected!.position = CGPointMake(getCircle().width, getCircle().width + 10)
+                    default:
+                        print(3)
+                    }
+                    redTurn = !redTurn
+                }
             }
         } else {
             
@@ -711,29 +736,28 @@ class GameScene: SKScene {
                 redTurn = !redTurn
             }
             if let s = selected{
-            if  selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
-                selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
-                selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
-                selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
-                selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
-                selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
-                selected!.position != CGPointMake(margin + getCircle().width + 10, getCircle().width + 10) &&
-                selected!.position != CGPointMake(margin + x + getCircle().width + 10, getCircle().width + 10) &&
-                selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, getCircle().width + 10) {
-                switch selected!.type {
-                case 1:
-                    selected!.position = CGPointMake(getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
-                case 2:
-                    selected!.position = CGPointMake(getCircle().width, CGRectGetMidY(self.frame))
-                case 3:
-                    selected!.position = CGPointMake(getCircle().width, getCircle().width + 10)
-                default:
-                    print(3)
+                if  selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
+                    selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
+                    selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
+                    selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
+                    selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
+                    selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMidY(self.frame)) &&
+                    selected!.position != CGPointMake(margin + getCircle().width + 10, getCircle().width + 10) &&
+                    selected!.position != CGPointMake(margin + x + getCircle().width + 10, getCircle().width + 10) &&
+                    selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, getCircle().width + 10) {
+                    switch selected!.type {
+                    case 1:
+                        selected!.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
+                    case 2:
+                        selected!.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMidY(self.frame))
+                    case 3:
+                        selected!.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, getCircle().width + 10)                default:
+                            print(3)
+                    }
+                    redTurn = !redTurn
                 }
-                redTurn = !redTurn
             }
-            }
-
+            
         }
         
     }

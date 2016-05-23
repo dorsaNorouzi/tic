@@ -19,6 +19,8 @@
 		775651DC1CEF6B4500742E85 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651DB1CEF6B4500742E85 /* ImageManager.swift */; };
 		775651DE1CEF6B6E00742E85 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651DD1CEF6B6E00742E85 /* Shape.swift */; };
 		775651E01CF2A15000742E85 /* WinScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651DF1CF2A15000742E85 /* WinScreen.swift */; };
+		775651E21CF37E2800742E85 /* HelpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651E11CF37E2800742E85 /* HelpScreen.swift */; };
+		775651E41CF3819F00742E85 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775651E31CF3819F00742E85 /* StartScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		775651DB1CEF6B4500742E85 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		775651DD1CEF6B6E00742E85 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		775651DF1CF2A15000742E85 /* WinScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinScreen.swift; sourceTree = "<group>"; };
+		775651E11CF37E2800742E85 /* HelpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpScreen.swift; sourceTree = "<group>"; };
+		775651E31CF3819F00742E85 /* StartScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 				775651DB1CEF6B4500742E85 /* ImageManager.swift */,
 				775651DD1CEF6B6E00742E85 /* Shape.swift */,
 				775651DF1CF2A15000742E85 /* WinScreen.swift */,
+				775651E11CF37E2800742E85 /* HelpScreen.swift */,
+				775651E31CF3819F00742E85 /* StartScreen.swift */,
 			);
 			path = "crazy tic tac toe";
 			sourceTree = "<group>";
@@ -272,7 +278,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				775651E21CF37E2800742E85 /* HelpScreen.swift in Sources */,
 				775651DE1CEF6B6E00742E85 /* Shape.swift in Sources */,
+				775651E41CF3819F00742E85 /* StartScreen.swift in Sources */,
 				775651AE1CEF6B1C00742E85 /* GameScene.swift in Sources */,
 				775651B01CEF6B1C00742E85 /* GameViewController.swift in Sources */,
 				775651AA1CEF6B1C00742E85 /* AppDelegate.swift in Sources */,

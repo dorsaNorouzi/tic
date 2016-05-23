@@ -67,6 +67,56 @@ class ImageManager {
         return image
         
     }
+    
+    class func imageForHelpSymbol() -> UIImage {
+        
+        let size: CGSize = CGSize(width: 38, height: 38);
+        
+        
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        
+        
+        //// Color Declarations
+        
+        let helpSymbolColor = UIColor.whiteColor()
+        
+        
+        
+        //// HelpSymbol Drawing
+        
+        let helpSymbolRect = CGRectMake(1, 1, 35, 35)
+        
+        let helpSymbolPath = UIBezierPath(ovalInRect: helpSymbolRect)
+        
+        helpSymbolColor.setStroke()
+        
+        helpSymbolPath.lineWidth = 2.5
+        
+        helpSymbolPath.stroke()
+        
+        let helpSymbolStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
+        
+        helpSymbolStyle.alignment = .Center
+        
+        
+        
+        let helpSymbolFontAttributes = [NSFontAttributeName: UIFont(name: "DINAlternate-Bold", size: 30)!, NSForegroundColorAttributeName: helpSymbolColor, NSParagraphStyleAttributeName: helpSymbolStyle]
+        
+        
+        
+        "?".drawInRect(helpSymbolRect, withAttributes: helpSymbolFontAttributes)
+        
+        
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return image
+        
+    }
 
     
 }

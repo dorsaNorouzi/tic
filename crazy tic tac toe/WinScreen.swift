@@ -13,7 +13,7 @@ class WinScreen: SKScene {
     let gameOverLabel = SKLabelNode(fontNamed:"Chalkduster")
     public var who = 0
     override func didMoveToView(view: SKView) {
-        gameOverLabel.fontColor = UIColor.blueColor()
+        gameOverLabel.fontColor = UIColor.greenColor()
         if who == 0{
             gameOverLabel.fontColor = UIColor.redColor()
         }
@@ -22,5 +22,14 @@ class WinScreen: SKScene {
         gameOverLabel.fontSize = 50
         gameOverLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame) )
         self.addChild(gameOverLabel)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let scene = GameScene()
+        let skView = self.view
+        skView!.ignoresSiblingOrder = true
+        scene.scaleMode = .ResizeFill
+        scene.size = (size: skView!.bounds.size)
+        skView!.presentScene(scene)
     }
 }
