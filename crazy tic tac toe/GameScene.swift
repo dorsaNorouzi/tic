@@ -677,7 +677,7 @@ class GameScene: SKScene {
                         selected!.position = CGPointMake(margin + getCircle().width + 10, getCircle().width + 10)
                     }
                 case 3:
-                    if !arr2[2][0][2] && arr[2][0][2] {
+                    if !arr2[2][0][2] && !arr[2][0][2] {
                         arr2[2][0][2] = true
                         selected!.position = CGPointMake(margin + getCircle().width + 10, getCircle().width + 10)
                     }
