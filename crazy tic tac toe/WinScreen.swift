@@ -11,7 +11,8 @@ import UIKit
 
 class WinScreen: SKScene {
     let gameOverLabel = SKLabelNode(fontNamed:"Chalkduster")
-    public var who = 0
+    //change
+    internal var who = 0
     override func didMoveToView(view: SKView) {
         gameOverLabel.fontColor = UIColor.greenColor()
         if who == 0{

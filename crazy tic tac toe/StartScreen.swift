@@ -21,7 +21,8 @@ class StartScreen: SKScene {
         self.addChild(startLabel)
         
         //help sign
-        var help = SKSpriteNode(texture: SKTexture(image: ImageManager.imageForHelpSymbol()))
+        //change
+        let help = SKSpriteNode(texture: SKTexture(image: ImageManager.imageForHelpSymbol()))
         help.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 70)
         help.name = "help"
         help.xScale = 2

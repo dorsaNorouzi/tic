@@ -11,8 +11,9 @@ import SpriteKit
 //circle = 1, square = 2, triangle = 3
 
 class Shape: SKSpriteNode {
-    public var type: Int
-    public var shapeColor: UIColor
+    //change
+    internal var type: Int
+    internal var shapeColor: UIColor
     init(type: Int, shapeC: UIColor, rect: CGRect ){
         self.type = type
         self.shapeColor = shapeC

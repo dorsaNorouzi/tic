@@ -22,11 +22,11 @@ class GameScene: SKScene {
         self.backgroundColor = UIColor.blackColor()
         
         //putting zeros in the array
-        for var i = 0; i < 3; i = i + 1 {
+        for _ in 0...2 {
             var a = [[Bool]]()
-            for var j = 0; j < 3; j = j + 1 {
+            for _ in 0...2 {
                 var b = [Bool]()
-                for var k = 0; k < 3; k = k + 1 {
+                for _ in 0...2{
                     b.append(false)
                 }
                 a.append(b)
@@ -34,12 +34,13 @@ class GameScene: SKScene {
             arr.append(a)
         }
         
+        
         //putting zeros in the array2
-        for var i = 0; i < 3; i = i + 1 {
+        for _ in 0...2 {
             var a = [[Bool]]()
-            for var j = 0; j < 3; j = j + 1 {
+            for _ in 0...2 {
                 var b = [Bool]()
-                for var k = 0; k < 3; k = k + 1 {
+                for _ in 0...2 {
                     b.append(false)
                 }
                 a.append(b)
@@ -52,45 +53,45 @@ class GameScene: SKScene {
         help.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         help.name = "help"
         self.addChild(help)
-
+        
         
         //left side stuff
-        for var i = 0; i < 3; i = i + 1 {
-            var shape = Shape(type: 1, shapeC: UIColor.redColor(), rect: getCircle())
+        for _ in 0...2 {
+            let shape = Shape(type: 1, shapeC: UIColor.redColor(), rect: getCircle())
             shape.position = CGPointMake(getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
             self.addChild(shape)
         }
         
         
-        for var i = 0; i < 3; i = i + 1 {
-            var shape2 = Shape(type: 2, shapeC: UIColor.redColor(), rect: getCircle())
+        for _ in 0...2 {
+            let shape2 = Shape(type: 2, shapeC: UIColor.redColor(), rect: getCircle())
             shape2.position = CGPointMake(getCircle().width, CGRectGetMidY(self.frame))
             self.addChild(shape2)
         }
         
-        for var i = 0; i < 3; i = i + 1 {
-            var shape3 = Shape(type: 3, shapeC: UIColor.redColor(), rect: getCircle())
+        for _ in 0...2 {
+            let shape3 = Shape(type: 3, shapeC: UIColor.redColor(), rect: getCircle())
             shape3.position = CGPointMake(getCircle().width, getCircle().width + 10)
             self.addChild(shape3)
             
         }
         
         //right side stuff
-        for var i = 0; i < 3; i = i + 1 {
-            var shape = Shape(type: 1, shapeC: UIColor.greenColor(), rect: getCircle())
+        for _ in 0...2 {
+            let shape = Shape(type: 1, shapeC: UIColor.greenColor(), rect: getCircle())
             shape.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10)
             self.addChild(shape)
         }
         
         
-        for var i = 0; i < 3; i = i + 1 {
-            var shape2 = Shape(type: 2, shapeC: UIColor.greenColor(), rect: getCircle())
+        for _ in 0...2 {
+            let shape2 = Shape(type: 2, shapeC: UIColor.greenColor(), rect: getCircle())
             shape2.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMidY(self.frame))
             self.addChild(shape2)
         }
         
-        for var i = 0; i < 3; i = i + 1 {
-            var shape3 = Shape(type: 3, shapeC: UIColor.greenColor(), rect: getCircle())
+        for _ in 0...2 {
+            let shape3 = Shape(type: 3, shapeC: UIColor.greenColor(), rect: getCircle())
             shape3.position = CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, getCircle().width + 10)
             self.addChild(shape3)
             
@@ -103,16 +104,17 @@ class GameScene: SKScene {
     
     
     func detectPan(recognizer:UIPanGestureRecognizer) {
-        let translation  = recognizer.translationInView(self.view!)
-        if let s = selected{
-            selected!.position = CGPointMake(lastLocation.x + translation.x, lastLocation.y - translation.y)
+        if self.view != nil{
+            let translation = recognizer.translationInView(self.view!)
+            if selected != nil{
+                selected!.position = CGPointMake(lastLocation.x + translation.x, lastLocation.y - translation.y)
+            }
+            
+            if recognizer.state == UIGestureRecognizerState.Ended{
+                toucheEnded()
+            }
         }
-        if recognizer.state == UIGestureRecognizerState.Ended{
-            toucheEnded()
-        }
-        
     }
-    
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -127,13 +129,13 @@ class GameScene: SKScene {
             if let n = node as? Shape{
                 if (redTurn && n.shapeColor == UIColor.redColor()) || (!redTurn && n.shapeColor == UIColor.greenColor()){
                     if n.position == CGPointMake(getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10) ||
-                    n.position == CGPointMake(getCircle().width, CGRectGetMidY(self.frame)) ||
-                    n.position == CGPointMake(getCircle().width, getCircle().width + 10) ||
-                    n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10) ||
-                    n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMidY(self.frame)) ||
+                        n.position == CGPointMake(getCircle().width, CGRectGetMidY(self.frame)) ||
+                        n.position == CGPointMake(getCircle().width, getCircle().width + 10) ||
+                        n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMaxY(self.frame) - getCircle().width - 10) ||
+                        n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, CGRectGetMidY(self.frame)) ||
                         n.position == CGPointMake(CGRectGetMaxX(self.frame) - getCircle().width, getCircle().width + 10) {
-                    selected = n
-                    touchingSomething = true
+                        selected = n
+                        touchingSomething = true
                     }
                 }
             }
@@ -151,7 +153,8 @@ class GameScene: SKScene {
         }
         
         // Remember original location
-        if let s = selected{
+        //change
+        if selected != nil{
             lastLocation = selected!.position
             //selectNodeForTouch(positionInScene)
         }
@@ -164,14 +167,6 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         
-        let biggestSquare = UIScreen.mainScreen().bounds.height
-        let margin = (UIScreen.mainScreen().bounds.width - biggestSquare)/2
-        
-        //get the size of the device
-        let x = biggestSquare / 3
-        let y = biggestSquare / 3
-        
-        // if (UIGestureRecognizer.state == UIGestureRecognizer)
     }
     
     func drawBG() {
@@ -485,7 +480,7 @@ class GameScene: SKScene {
                 winTest(0, y: 0)
                 redTurn = !redTurn
             }
-            if let s = selected{
+            if selected != nil{
                 if  selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
                     selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
                     selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
@@ -662,7 +657,7 @@ class GameScene: SKScene {
                 redTurn = !redTurn
             }
                 
-            //third row squares
+                //third row squares
             else if(selected?.position.x < margin + x && selected?.position.y > 0 ){
                 
                 switch selected!.type {
@@ -735,7 +730,7 @@ class GameScene: SKScene {
                 winTest(0, y: 0)
                 redTurn = !redTurn
             }
-            if let s = selected{
+            if selected != nil{
                 if  selected!.position != CGPointMake(margin + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
                     selected!.position != CGPointMake(margin + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
                     selected!.position != CGPointMake(margin + x + x + getCircle().width + 10, CGRectGetMaxY(self.frame) - getCircle().width - 10) &&
@@ -768,7 +763,7 @@ class GameScene: SKScene {
         
         //red stuff
         //if they are equal
-        for var i = 0; i < 3; i = i + 1 {
+        for i in 0...2 {
             if arr[0][0][i] && arr[0][1][i] && arr[0][2][i] {
                 win = true
             } else if arr[1][0][i] && arr[1][1][i] && arr[1][2][i] {
@@ -848,8 +843,8 @@ class GameScene: SKScene {
         }
         
         //if they are inside each other
-        for var i = 0; i < 3; i = i + 1 {
-            for var j = 0; j < 3; j = j + 1 {
+        for i in 0...2 {
+            for j in 0...2 {
                 if arr[i][j][0] && arr[i][j][1] && arr[i][j][2] {
                     win = true
                 }
@@ -858,7 +853,7 @@ class GameScene: SKScene {
         
         //green stuff
         //if they are equal
-        for var i = 0; i < 3; i = i + 1 {
+        for i in 0...2 {
             if arr2[0][0][i] && arr2[0][1][i] && arr2[0][2][i] {
                 winBlue = true
             } else if arr2[1][0][i] && arr2[1][1][i] && arr2[1][2][i] {
@@ -939,8 +934,8 @@ class GameScene: SKScene {
         
         
         //if they are inside each other
-        for var i = 0; i < 3; i = i + 1 {
-            for var j = 0; j < 3; j = j + 1 {
+        for i in 0...2 {
+            for j in 0...2 {
                 if arr2[i][j][0] && arr2[i][j][1] && arr2[i][j][2] {
                     winBlue = true
                 }
